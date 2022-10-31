@@ -1,0 +1,94 @@
+import styled from "styled-components";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import LoginForm from "../shared/LoginForm";
+import { Link } from "react-router-dom";
+
+const LoginBox = () => {
+  return (
+    <LoginForm
+      title={"돌아오신 것을 환영해요!"}
+      subtitle={"다시 만나다니 너무 반가워요!"}
+    >
+      <Container>
+        <FormCon>
+          <MainLabel htmlFor="email">이메일</MainLabel>
+          <MainInput type="email" required />
+          <MainLabel htmlFor="pw">비밀번호</MainLabel>
+          <MainInput type="text" required />
+          <LoginBtn type="submit">로그인</LoginBtn>
+          <span>
+            계정이 필요한가요?
+            <SignLink to={"/sign"}>가입하기</SignLink>
+          </span>
+        </FormCon>
+      </Container>
+    </LoginForm>
+  );
+};
+
+export default LoginBox;
+
+// thiscord안의 signin쪽 레이아웃입니다.
+const Container = styled.div`
+  width: 400px;
+  height: 500px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+// signin쪽의 form 입니다.
+const FormCon = styled.form`
+  border: 1px solid transparent;
+
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+// signin 회원가입버튼부분입니다.
+const LoginBtn = styled.button`
+  border: 1px solid transparent;
+  background-color: #5865f2;
+  border-radius: 5px;
+
+  color: white;
+
+  height: 50px;
+
+  &:hover {
+    background-color: #4752c4;
+    color: white;
+  }
+`;
+
+// signin input 속성정보입니다.
+const MainInput = styled.input`
+  border: 1px solid black;
+  background-color: #202225;
+  border-radius: 5px;
+  color: white;
+
+  width: 400px;
+  height: 50px;
+`;
+
+// signin label 속성입니다.
+const MainLabel = styled.label`
+  border: 1px solid transparent;
+
+  width: 400px;
+  height: 0px;
+`;
+
+const SignLink = styled(Link)`
+  text-decoration: none;
+  color: #00aff4;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
