@@ -56,13 +56,13 @@ const LoginBtn = styled.button`
   background-color: #5865f2;
   border-radius: 5px;
 
-  color: white;
+  color: #f2f2f2;
 
   height: 50px;
 
   &:hover {
     background-color: #4752c4;
-    color: white;
+    color: #f2f2f2;
   }
 `;
 
@@ -71,10 +71,14 @@ const MainInput = styled.input`
   border: 1px solid black;
   background-color: #202225;
   border-radius: 5px;
-  color: white;
+  color: #f2f2f2;
 
   width: 400px;
   height: 50px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 // signin label 속성입니다.
