@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+const SignUp = () => {
   const navigate = useNavigate();
   const onClickLogin = () => {
     navigate(`/`);
@@ -15,10 +15,6 @@ const SignIn = () => {
     email: yup.string().email().required("이메일을 입력해주세요"),
     name: yup.string().required("이름을 입력해주세요"),
     pw: yup.string().min(8).max(16).required(),
-    checkPw: yup
-      .string()
-      .oneOf([yup.ref("pw"), null])
-      .required(),
   });
 
   const {
@@ -29,12 +25,12 @@ const SignIn = () => {
     resolver: yupResolver(schema),
   });
 
-  const submitForm = (data: SignIn) => {
+  const submitForm = (data: SignUp) => {
     console.log("떠야지", data);
   };
 
   return (
-    <SignInContainer className="SignIn">
+    <SignUpContainer className="SignIn">
       <SignContainer>
         <GuideSection>ThisCord 계정만들기</GuideSection>
         <Container>
@@ -56,7 +52,7 @@ const SignIn = () => {
             <span>{errors.name && "이름 형식이 맞지 않습니다."}</span>
             <MainLabel htmlFor="pw">비밀번호</MainLabel>
             <MainInput
-              type="text"
+              type="password"
               placeholder="비밀번호를 입력해주세요"
               {...register("pw")}
             />
@@ -68,14 +64,14 @@ const SignIn = () => {
           <LoginGo onClick={onClickLogin}>이미 계정이 있으신가요?</LoginGo>
         </Container>
       </SignContainer>
-    </SignInContainer>
+    </SignUpContainer>
   );
 };
 
-export default SignIn;
+export default SignUp;
 
 // 전체 html의 속성입니다.
-const SignInContainer = styled.div`
+const SignUpContainer = styled.div`
   border: 1px solid transparent;
   background-color: #5865f2;
   color: white;
