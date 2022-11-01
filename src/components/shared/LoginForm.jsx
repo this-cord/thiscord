@@ -48,7 +48,8 @@ const GuideSection = styled.div`
   border: 1px solid transparent;
 
   font-family: S-CoreDream-3Light;
-  font-size: 32px;
+  font-size: 36px;
+  font-weight: thin;
 
   height: 50px;
   display: flex;
@@ -58,6 +59,7 @@ const GuideSection = styled.div`
 const SubGuide = styled.div`
   border: 1px solid transparent;
   font-size: 14px;
+  font-weight: 100;
 `;
 
 export default LoginForm;

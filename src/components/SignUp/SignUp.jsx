@@ -140,6 +140,10 @@ const MainInput = styled.input`
 
   width: 400px;
   height: 50px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 // signin label 속성입니다.
@@ -153,7 +157,7 @@ const MainLabel = styled.label`
 const LoginGo = styled.span`
   &:hover {
     color: white;
-    background-color: white;
     font-weight: bold;
+    text-decoration: underline;
   }
 `;
