@@ -15,7 +15,7 @@ const SignUp = () => {
   const schema = yup.object().shape({
     email: yup.string().email().required("이메일을 입력해주세요"),
     name: yup.string().required("이름을 입력해주세요"),
-    pw: yup.string().min(8).max(16).required(),
+    pw: yup.string().min(8).max(16).required("비밀번호는 8-16자 사이입니다."),
   });
 
   const {
@@ -66,34 +66,6 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-// 전체 html의 속성입니다.
-const SignUpContainer = styled.div`
-  border: 1px solid transparent;
-  background-color: #5865f2;
-  color: white;
-
-  height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-// thiscord의 기본 레이아웃입니다.
-const SignContainer = styled.div`
-  border: 1px solid transparent;
-  background-color: #2f3136;
-  border-radius: 10px;
-
-  width: 500px;
-  height: 600px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 // thiscord안의 signin쪽 레이아웃입니다.
 const Container = styled.div`
