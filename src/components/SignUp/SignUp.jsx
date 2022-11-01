@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import LoginForm from "../shared/LoginForm";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -30,41 +31,37 @@ const SignUp = () => {
   };
 
   return (
-    <SignUpContainer className="SignIn">
-      <SignContainer>
-        <GuideSection>ThisCord 계정만들기</GuideSection>
-        <Container>
-          <FormCon onSubmit={handleSubmit(submitForm)}>
-            <MainLabel htmlFor="email">이메일</MainLabel>
-            <MainInput
-              type="email"
-              placeholder="이메일을 입력해주세요"
-              {...register("email")}
-            />
-
-            <span>{errors.email && "이메일 형식이 맞지 않습니다."}</span>
-            <MainLabel htmlFor="name">이름</MainLabel>
-            <MainInput
-              type="text"
-              placeholder="이름을 입력해주세요"
-              {...register("name")}
-            />
-            <span>{errors.name && "이름 형식이 맞지 않습니다."}</span>
-            <MainLabel htmlFor="pw">비밀번호</MainLabel>
-            <MainInput
-              type="password"
-              placeholder="비밀번호를 입력해주세요"
-              {...register("pw")}
-            />
-            <span>
-              {errors.pw && "비밀번호는 최소8자리~16자리로 입력해주세요."}{" "}
-            </span>
-            <SignBtn type="submit">회원가입</SignBtn>
-          </FormCon>
-          <LoginGo onClick={onClickLogin}>이미 계정이 있으신가요?</LoginGo>
-        </Container>
-      </SignContainer>
-    </SignUpContainer>
+    <LoginForm title={"This.Cord 계정 만들기"} subtitle="">
+      <Container>
+        <FormCon onSubmit={handleSubmit(submitForm)}>
+          <MainLabel htmlFor="email">이메일</MainLabel>
+          <MainInput
+            type="email"
+            placeholder="이메일을 입력해주세요"
+            {...register("email")}
+          />
+          <span>{errors.email && "이메일 형식이 맞지 않습니다."}</span>
+          <MainLabel htmlFor="name">이름</MainLabel>
+          <MainInput
+            type="text"
+            placeholder="이름을 입력해주세요"
+            {...register("name")}
+          />
+          <span>{errors.name && "이름 형식이 맞지 않습니다."}</span>
+          <MainLabel htmlFor="pw">비밀번호</MainLabel>
+          <MainInput
+            type="text"
+            placeholder="비밀번호를 입력해주세요"
+            {...register("pw")}
+          />
+          <span>
+            {errors.pw && "비밀번호는 최소8자리~16자리로 입력해주세요."}{" "}
+          </span>
+          <SignBtn type="submit">회원가입</SignBtn>
+        </FormCon>
+        <LoginGo onClick={onClickLogin}>이미 계정이 있으신가요?</LoginGo>
+      </Container>
+    </LoginForm>
   );
 };
 
@@ -119,19 +116,6 @@ const FormCon = styled.form`
   justify-content: space-around;
 `;
 
-// signin 제목부분입니다.
-const GuideSection = styled.div`
-  border: 1px solid transparent;
-
-  font-size: 30px;
-
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-// signin 회원가입버튼부분입니다.
 const SignBtn = styled.button`
   border: 1px solid transparent;
   background-color: #5865f2;
@@ -141,8 +125,8 @@ const SignBtn = styled.button`
 
   height: 50px;
 
-  &::hover {
-    background-color: #5865f2;
+  &:hover {
+    background-color: #4752c4;
     color: white;
   }
 `;
@@ -150,7 +134,7 @@ const SignBtn = styled.button`
 // signin input 속성정보입니다.
 const MainInput = styled.input`
   border: 1px solid black;
-  background-color: black;
+  background-color: #202225;
   border-radius: 5px;
   color: white;
 
@@ -167,7 +151,7 @@ const MainLabel = styled.label`
 `;
 
 const LoginGo = styled.span`
-  &::hover {
+  &:hover {
     color: white;
     background-color: white;
     font-weight: bold;
