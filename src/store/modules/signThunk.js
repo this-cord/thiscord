@@ -34,3 +34,16 @@ export const __loginUser = createAsyncThunk(
     }
   }
 );
+
+export const __logoutUser = createAsyncThunk(
+  "user/loginUser",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.post(`${URL}/api/logout`, payload)
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+

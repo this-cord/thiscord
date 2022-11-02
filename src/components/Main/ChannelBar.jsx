@@ -1,22 +1,31 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ChannelBar = () => {
+  const navigate = useNavigate();
+  const onLogout = () => {
+    sessionStorage.removeItem("Access_Token");
+    sessionStorage.removeItem("Refresh_Token");
+    alert("로그아웃 성공");
+    navigate("/");
+  };
+  const userName = "엄준식";
   return (
     <TotalChannel>
       <ChannelList>
-        <Channel>메인서버</Channel>
+        <Channel>항해</Channel>
       </ChannelList>
       <ChannelSec>
-        <ChannelTop>김항해의 This.Cord</ChannelTop>
+        <ChannelTop>{userName} 님의 This.Cord</ChannelTop>
         <ChannelBody>
           <ChattingRoom>
             <RoomName># 채팅방1</RoomName>
-            <RNChange>변신</RNChange>
+            <RNChange>추가</RNChange>
           </ChattingRoom>
         </ChannelBody>
         <ChannelB>
-          <UserInfo>김항해님</UserInfo>
-          <NewChatRoom>채팅방개설</NewChatRoom>
+          <UserInfo>{userName}님</UserInfo>
+          <NewChatRoom onClick={onLogout}>로그아웃</NewChatRoom>
         </ChannelB>
       </ChannelSec>
     </TotalChannel>

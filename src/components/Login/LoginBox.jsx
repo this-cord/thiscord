@@ -32,8 +32,12 @@ password: "test001@"
       __loginUser({
         email: userData.email,
         password: userData.password,
-      }).then(alert("Hello"), navigate("/main"))
+      })
     );
+    if (sessionStorage.Access_Token !== undefined) {
+      alert("로그인 성공");
+      navigate("/main");
+    }
   };
   return (
     <LoginForm
