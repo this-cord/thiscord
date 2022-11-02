@@ -3,6 +3,11 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import handleSubmit from "../SignUp/SignUp";
 import LoginBox from "./LoginBox";
+/*
+email: dudgns911@naver.com"
+name:"정영훈"
+password:"test123@"
+*/
 
 const Login = () => {
   const [state, setState] = useState({

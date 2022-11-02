@@ -8,11 +8,28 @@ export const __addUsers = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axios.post(
-        `${URL}/api/user/signup`,
+        `${URL}/api/signup`,
         payload
       );
       console.log("회원가입", data);
       alert("회원가입에 성공하셨습니다!");
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      console.log("에러", error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const __loginUsers = createAsyncThunk(
+  "users/loginUser",
+  async (payload, thunkAPI) => {
+    
+    try {
+      const data = await axios.post(
+        `${URL}/api/login`,
+        payload
+      );
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       console.log("에러", error);

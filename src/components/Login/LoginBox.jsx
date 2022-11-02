@@ -1,18 +1,43 @@
 import styled from "styled-components";
 import LoginForm from "../shared/LoginForm";
 import { Link } from "react-router-dom";
-import * as yup from "yup";
+import { useState } from "react";
+import { __loginUsers } from "../../store/modules/signThunk";
 
 const LoginBox = () => {
+  const initalState = {
+    email: "",
+    password: "",
+  };
+
+  const [loginUser, setLoginUser] = useState(initalState);
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setLoginUser({
+      ...loginUser,
+      [name]: value,
+    });
+  };
+
+  const onSubmitHandler = () => {
+    dispatchEvent(__loginUsers(loginUser));
+  };
   return (
     <LoginForm
       title={"돌아오신 것을 환영해요!"}
       subtitle={"다시 만나다니 너무 반가워요!"}
     >
       <Container>
-        <FormCon>
+        <FormCon onSubmit={onSubmitHandler}>
           <MainLabel htmlFor="email">이메일</MainLabel>
-          <MainInput type="email" required />
+          <MainInput
+            type="email"
+            required
+            name="email"
+            value={loginUser.email}
+            onChange={onChangeHandler}
+          />
           <MainLabel htmlFor="pw">비밀번호</MainLabel>
           <MainInput type="text" required />
           <LoginBtn type="submit">로그인</LoginBtn>
