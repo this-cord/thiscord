@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
 import LoginForm from "../shared/LoginForm";
 import { Link } from "react-router-dom";
+import * as yup from "yup";
 
 const LoginBox = () => {
   return (
@@ -20,7 +18,7 @@ const LoginBox = () => {
           <LoginBtn type="submit">로그인</LoginBtn>
           <span>
             계정이 필요한가요?
-            <SignLink to={"/sign"}>가입하기</SignLink>
+            <SignLink to="/sign">가입하기</SignLink>
           </span>
         </FormCon>
       </Container>
