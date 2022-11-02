@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import ModalPage from "./ModalPage";
+import { __addRoom, __getRoomById } from "../../store/modules/mainSlice";
+import useInput from "../../hooks/useInput";
 
 const Main = () => {
+  const dispatch = useDispatch();
+
+  // const params = useParams();
+  // const roomId = params.id;
+
+  // useEffect(() => {
+  //   dispatch(__getRoomById(roomId));
+  // }, [dispatch, roomId]);
+  // console.log("룸 아이디", roomId);
+  const roomData = useSelector((state) => state.mainSlice.data);
+  console.log("룸데잉터", roomData);
+
   return (
     <MainContainer>
       <Container>
@@ -20,7 +37,8 @@ const Main = () => {
             <ChannelBottom>
               <ChannelB>
                 <UserInfo>김항해님</UserInfo>
-                <NewChatRoom>채팅방개설</NewChatRoom>
+
+                <ModalPage />
               </ChannelB>
             </ChannelBottom>
           </ChannelSec>
@@ -240,6 +258,7 @@ const UserInfo = styled.div`
   height: 45px;
 
   display: flex;
+  justify-content: center;
   align-items: center;
 `;
 

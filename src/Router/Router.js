@@ -8,13 +8,13 @@ import SignPage from "../pages/SignPage";
 const Router = () => {
   return (
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/sign" element={<SignPage />} />
-          <Route path="/main" element={<MainPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign" element={<SignPage />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </BrowserRouter>
   );
 };

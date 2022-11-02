@@ -1,9 +1,9 @@
 {
   "data": [
     {
-      "name": "",
-      "chattingRoom": [],
-      "chattingLog": [],
+      "name": "지져스",
+      "chattingRoom": [1, 2, 3],
+      "chattingLog": ["ㅎㅇ", "ㅂㅇ", "ㄹㅇ"],
       "friendsOnline": [],
       "friendsOffline": []
     }
