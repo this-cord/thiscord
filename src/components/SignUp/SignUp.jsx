@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../shared/LoginForm";
-import { __addUsers } from "../../store/modules/signThunk";
+import { __signUser } from "../../store/modules/signThunk";
 import { useDispatch } from "react-redux";
 
 const SignUp = () => {
@@ -28,7 +28,11 @@ const SignUp = () => {
   };
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(__addUsers(user));
+    dispatch(__signUser(user)).then((rslt) => {
+      if (rslt.payload.result === true) {
+        navigate("/");
+      }
+    });
     setUser(initalState);
   };
 
@@ -80,7 +84,7 @@ const SignUp = () => {
           <span>{errors.name && "이름 형식이 맞지 않습니다."}</span>
           <MainLabel htmlFor="pw">비밀번호</MainLabel>
           <MainInput
-            type="text"
+            type="password"
             placeholder="비밀번호를 입력해주세요"
             onChange={onChangeHandler}
             name="password"
