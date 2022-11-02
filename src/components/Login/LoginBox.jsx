@@ -1,27 +1,39 @@
 import styled from "styled-components";
 import LoginForm from "../shared/LoginForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { __loginUsers } from "../../store/modules/signThunk";
+import { __loginUser } from "../../store/modules/signThunk";
+import { useDispatch } from "react-redux";
 
 const LoginBox = () => {
   const initalState = {
     email: "",
     password: "",
   };
-
-  const [loginUser, setLoginUser] = useState(initalState);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(initalState);
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-    setLoginUser({
-      ...loginUser,
+    setUserData({
+      ...userData,
       [name]: value,
     });
   };
-
-  const onSubmitHandler = () => {
-    dispatchEvent(__loginUsers(loginUser));
+  /*
+email: test001@gmail.com"
+name:"테스트용"
+password: "test001@"
+*/
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      __loginUser({
+        email: userData.email,
+        password: userData.password,
+      }).then(alert("Hello"), navigate("/main"))
+    );
   };
   return (
     <LoginForm
@@ -33,13 +45,19 @@ const LoginBox = () => {
           <MainLabel htmlFor="email">이메일</MainLabel>
           <MainInput
             type="email"
-            required
             name="email"
-            value={loginUser.email}
+            value={userData.email}
             onChange={onChangeHandler}
+            required
           />
           <MainLabel htmlFor="pw">비밀번호</MainLabel>
-          <MainInput type="text" required />
+          <MainInput
+            type="text"
+            name="password"
+            value={userData.password}
+            onChange={onChangeHandler}
+            required
+          />
           <LoginBtn type="submit">로그인</LoginBtn>
           <span>
             계정이 필요한가요?
