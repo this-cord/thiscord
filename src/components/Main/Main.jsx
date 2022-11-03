@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { __getPage } from "../../store/modules/mainThunk";
 import ChannelBar from "./ChannelBar";
 import ChattingRoom from "./ChattingRoom";
 import FriendBar from "./FriendBar";
 
 const Main = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(__getPage());
+  }, [dispatch]);
+  const mainPage = useSelector((state) => state.post?.page);
+  const name = mainPage?.name;
+  const room = mainPage?.chattingRoom;
+  const onlineUser = mainPage?.onlineUser;
+  const offlineUser = mainPage?.offlineUser;
+  console.log(mainPage);
   return (
     <MainContainer>
       <Container>
-        <ChannelBar />
+        <ChannelBar userName={name} ChattingRoom={room} />
         <ChattingRoom />
-        <FriendBar />
+        <FriendBar online={onlineUser} offline={offlineUser} />
       </Container>
     </MainContainer>
   );
