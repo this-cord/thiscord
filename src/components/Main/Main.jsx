@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { __getPage } from "../../store/modules/mainThunk";
+
+import { __getDetail, __getPage } from "../../store/modules/mainThunk";
 
 import ChannelBar from "./ChannelBar";
 import ChattingRoom from "./ChattingRoom";
@@ -14,12 +15,19 @@ const Main = () => {
   useEffect(() => {
     dispatch(__getPage());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(__getDetail(1));
+  }, [dispatch]);
   const mainPage = useSelector((state) => state.post?.page);
+  const detail = useSelector((state) => state.post?.detail);
+
   const name = mainPage?.name;
   const room = mainPage?.chattingRoom;
   const onlineUser = mainPage?.onlineUser;
   const offlineUser = mainPage?.offlineUser;
-  console.log(mainPage);
+
+  console.log(detail);
 
   return (
     <MainContainer>

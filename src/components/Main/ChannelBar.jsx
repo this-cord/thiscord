@@ -33,7 +33,9 @@ const ChannelBar = (props) => {
         <ChannelBody>
           <ChattingRoom>
             {room &&
-              room.map((data, index) => <RoomName> {data.roomName} </RoomName>)}
+              room.map((data) => (
+                <RoomName> {data.roomName.slice(9, -2)} </RoomName>
+              ))}
           </ChattingRoom>
         </ChannelBody>
         <ChannelB>
@@ -107,7 +109,7 @@ const ChannelTop = styled.div`
 // 채널리스트 옆 섹션 최상단 username과 생성버튼 감싸주는 섹션
 const TopSec = styled.div`
   border: 1px solid transparent;
-  
+
   width: 200px;
   height: 60px;
 
