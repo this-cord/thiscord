@@ -1,21 +1,35 @@
 import styled from "styled-components";
 import FriendState from "./FriendState";
 
-const FriendBar = () => {
+const FriendBar = (props) => {
+  const online = props.online;
+  const offline = props.offline;
   return (
     <UserSec>
       <UserList>
         <UserOn>
           <ListTitle>온라인</ListTitle>
           <UserOnline>
-            <FriendState name={"금강선"} />
+            {online &&
+              online.map((data, index) => (
+                <FriendState
+                  onName={online[index]?.name}
+                  status={online[index]?.status.slice(0, 2)}
+                />
+              ))}
           </UserOnline>
         </UserOn>
 
         <UserOff>
           <ListTitle>오프라인</ListTitle>
           <UserOffline>
-            <FriendState name={"강원기"} />
+            {offline &&
+              offline.map((data, index) => (
+                <FriendState
+                  offName={offline[index]?.name}
+                  status={offline[index]?.status.slice(0, 3)}
+                />
+              ))}
           </UserOffline>
         </UserOff>
       </UserList>

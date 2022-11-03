@@ -55,7 +55,7 @@ password: "엄준식123@"
           />
           <MainLabel htmlFor="pw">비밀번호</MainLabel>
           <MainInput
-            type="text"
+            type="password"
             name="password"
             value={userData.password}
             onChange={onChangeHandler}

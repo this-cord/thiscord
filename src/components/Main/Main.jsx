@@ -24,8 +24,8 @@ const Main = () => {
   return (
     <MainContainer>
       <Container>
-        <ChannelBar userName={name} ChattingRoom={room} />
-        <ChattingRoom />
+        <ChannelBar userName={name} room={room} />
+        <ChattingRoom room={room} />
         <FriendBar online={onlineUser} offline={offlineUser} />
       </Container>
     </MainContainer>

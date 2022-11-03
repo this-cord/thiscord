@@ -6,7 +6,7 @@ const ChattingRoom = () => {
       <ChatRoomTop>
         <ChatTitle># 일반</ChatTitle>
       </ChatRoomTop>
-      <ChatRoomBody>채널방 중간</ChatRoomBody>
+      <ChatRoomBody></ChatRoomBody>
       <Chat>
         <ChatSec>
           <ChatInput placeholder="# 일반 에 메세지 보내기"></ChatInput>

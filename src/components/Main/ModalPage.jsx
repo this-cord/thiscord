@@ -68,10 +68,11 @@ export default function ModalPage() {
 }
 
 const OpenModal = styled.button`
-  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 5px;
   color: black;
-  width: 60px;
-  height: 50px;
+  width: 100%;
+  height: 30px;
 `;
 
 const ModalContainer = styled.div`

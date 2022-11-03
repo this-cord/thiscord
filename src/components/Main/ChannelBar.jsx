@@ -11,33 +11,29 @@ const ChannelBar = (props) => {
     sessionStorage.removeItem("Refresh_Token");
     alert("로그아웃 성공");
     navigate("/");
-  
-  const nameData = useSelector((state) => (state));
+  };
 
-  console.log("네임데이터", nameData);
   let userName = props.userName;
   if (userName === "엄준식") {
     userName = "어떻게 사람 이름이 엄준식";
   }
 
+  const room = props.room;
   return (
     <TotalChannel>
       <ChannelList>
         <Channel>항해</Channel>
       </ChannelList>
       <ChannelSec>
-        <ChannelTop>{userName}</ChannelTop>
+        <ChannelTop>
+          <TopSec>
+            {userName} <ModalPage />
+          </TopSec>
+        </ChannelTop>
         <ChannelBody>
           <ChattingRoom>
-            {nameData?.map((item) => (
-              <RoomName id={item.data.ChattingRoom.roomId}># 채팅방1
-
-              </RoomName>
-            ))}
-            
-            <RNChange>
-              <ModalPage />
-            </RNChange>
+            {room &&
+              room.map((data, index) => <RoomName> {data.roomName} </RoomName>)}
           </ChattingRoom>
         </ChannelBody>
         <ChannelB>
@@ -49,7 +45,7 @@ const ChannelBar = (props) => {
   );
 };
 
-// export default ChannelBar;
+export default ChannelBar;
 
 // 채널리스트+ 옆섹션
 const TotalChannel = styled.div`
@@ -108,6 +104,19 @@ const ChannelTop = styled.div`
   align-items: center;
 `;
 
+// 채널리스트 옆 섹션 최상단 username과 생성버튼 감싸주는 섹션
+const TopSec = styled.div`
+  border: 1px solid transparent;
+  
+  width: 200px;
+  height: 60px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 // 채널리스트 중간 부분
 
 const ChannelBody = styled.div`
@@ -126,7 +135,7 @@ const ChattingRoom = styled.div`
   margin-top: 15px;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
@@ -167,9 +176,10 @@ const UserInfo = styled.div`
 `;
 
 const NewChatRoom = styled.button`
-  /* border: 1px solid white; */
+  border: 1px solid transparent;
+  border-radius: 5px;
 
-  width: 30%;
-  height: 75%;
+  width: 100px;
+  height: 30px;
   margin: auto 10px;
 `;
