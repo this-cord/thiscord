@@ -1,11 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
-
-import mainSlice from "../modules/mainSlice";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import users from "../modules/signModule";
 
 const store = configureStore({
   reducer: {
-    mainSlice: mainSlice,
+    users: users.reducer,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  }),
 });
 
 export default store;

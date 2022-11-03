@@ -1,13 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../shared/LoginForm";
+import { __signUser } from "../../store/modules/signThunk";
+import { useDispatch } from "react-redux";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const initalState = {
+    email: "",
+    password: "",
+    name: "",
+  };
+
+  const [user, setUser] = useState(initalState);
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setUser({
+      ...user,
+      [name]: value,
+    });
+  };
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(__signUser(user)).then((rslt) => {
+      if (rslt.payload.result === true) {
+        navigate("/");
+      }
+    });
+    setUser(initalState);
+  };
+
   const onClickLogin = () => {
     navigate(`/`);
   };
@@ -33,26 +61,35 @@ const SignUp = () => {
   return (
     <LoginForm title={"This.Cord 계정 만들기"} subtitle="">
       <Container>
-        <FormCon onSubmit={handleSubmit(submitForm)}>
+        <FormCon onSubmit={onSubmitHandler}>
           <MainLabel htmlFor="email">이메일</MainLabel>
           <MainInput
             type="email"
             placeholder="이메일을 입력해주세요"
-            {...register("email")}
+            onChange={onChangeHandler}
+            name="email"
+            value={user.email}
+            // {...register("email")}
           />
           <span>{errors.email && "이메일 형식이 맞지 않습니다."}</span>
           <MainLabel htmlFor="name">이름</MainLabel>
           <MainInput
             type="text"
             placeholder="이름을 입력해주세요"
-            {...register("name")}
+            onChange={onChangeHandler}
+            name="name"
+            value={user.name}
+            // {...register("name")}
           />
           <span>{errors.name && "이름 형식이 맞지 않습니다."}</span>
           <MainLabel htmlFor="pw">비밀번호</MainLabel>
           <MainInput
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            {...register("pw")}
+            onChange={onChangeHandler}
+            name="password"
+            value={user.password}
+            // {...register("pw")}
           />
           <span>
             {errors.pw && "비밀번호는 최소8자리~16자리로 입력해주세요."}{" "}

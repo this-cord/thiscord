@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -11,6 +11,9 @@ Modal.setAppElement("#root");
 export default function ModalPage() {
   const dispatch = useDispatch();
 
+  const initialState = {
+    name: "",
+  };
   // useEffect(() => {
   //   dispatch(__getRoomById(roomId));
   // }, [dispatch, roomId]);
@@ -18,18 +21,27 @@ export default function ModalPage() {
   // console.log("룸아디", roomId);
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  const [name, onChangeNameHandler, setRoomName] = useInput();
+  const [userName, onChangeuserNameHandler, setuserName] = useInput();
 
-  const onCreate = () => {
-    const newRoom = {
-      name: name,
-    };
-
-    dispatch(__addRoom(newRoom));
-    console.log("생성완료!", newRoom);
-    // dispatch(__getRoomById(roomId));
+  const [userData, setUserData] = useState(initialState);
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
   };
-  console.log(onCreate);
+
+  const onCreate = (e) => {
+    e.preventDefault();
+    dispatch(
+      __addRoom({
+        name: userData.name,
+      })
+    );
+    console.log("하하", userData.name);
+  };
+
   return (
     <div className="App">
       <OpenModal onClick={() => setIsOpen(true)}>채팅방생성</OpenModal>
@@ -41,8 +53,8 @@ export default function ModalPage() {
               type="text"
               placeholder={"채팅방 이름을 적어주세요"}
               name="name"
-              onChange={onChangeNameHandler}
-              value={name}
+              onChange={onChangeHandler}
+              value={userData.name}
             ></ModalInput>
             <Btns>
               <NewRoom onClick={onCreate}>생성하기</NewRoom>

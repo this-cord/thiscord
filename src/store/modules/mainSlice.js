@@ -17,11 +17,16 @@ export const __addRoom = createAsyncThunk(
     console.log("dd", payload);
     try {
       const data = await axios.post(
-        "http://44.201.230.211:8080/chat/room",
-        payload.data
+        "http://44.201.230.211:8080/chat/room/",
+        payload,
+        {
+          headers: {
+            Authorization: `Baerer ${sessionStorage.getItem("Access_Token")}`,
+          },
+        }
       );
       console.log("데이타", data);
-      return thunkAPI.fuifliiedWithValue(data.data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       console.log("e다", e);
       return thunkAPI.rejectWithValue(e);
@@ -45,32 +50,32 @@ export const __getRoomById = createAsyncThunk(
   }
 );
 
-export const __updateRoom = createAsyncThunk(
-  "UPDATE_ROOM",
-  async (payload, thunkAPI) => {
-    try {
-      const data = await axios.patch(
-        `http://44.201.230.211:8080/${payload.id}`,
-        payload
-      );
-      return thunkAPI.fuifliiedWithValue(data.data);
-    } catch (e) {
-      return thunkAPI.rejectedWithValue(e);
-    }
-  }
-);
+// export const __updateRoom = createAsyncThunk(
+//   "UPDATE_ROOM",
+//   async (payload, thunkAPI) => {
+//     try {
+//       const data = await axios.patch(
+//         `http://44.201.230.211:8080/${payload}`,
+//         payload
+//       );
+//       return thunkAPI.fuifliiedWithValue(data.data);
+//     } catch (e) {
+//       return thunkAPI.rejectedWithValue(e);
+//     }
+//   }
+// );
 
-export const __deleteRoom = createAsyncThunk(
-  "DELETE_ROOM",
-  async (payload, thunkAPI) => {
-    try {
-      await axios.delete(`http://44.201.230.211:8080/${payload}`);
-      return thunkAPI.fulfillWithValue(payload);
-    } catch (error) {
-      return thunkAPI.rejectedWithValue(error.code);
-    }
-  }
-);
+// export const __deleteRoom = createAsyncThunk(
+//   "DELETE_ROOM",
+//   async (payload, thunkAPI) => {
+//     try {
+//       await axios.delete(`http://44.201.230.211:8080/${payload}`);
+//       return thunkAPI.fulfillWithValue(payload);
+//     } catch (error) {
+//       return thunkAPI.rejectedWithValue(error.code);
+//     }
+//   }
+// );
 
 export const mainSlice = createSlice({
   name: "room",
@@ -105,32 +110,32 @@ export const mainSlice = createSlice({
 
     //Update
 
-    [__updateRoom.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__updateRoom.fulfilled]: (state, action) => {
-      const target = state.data.findIndex((room) => room.id === action.payload);
-      state.data.splice(target, 1, action.payload);
-    },
-    [__updateRoom.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+    // [__updateRoom.pending]: (state) => {
+    //   state.isLoading = true;
+    // },
+    // [__updateRoom.fulfilled]: (state, action) => {
+    //   const target = state.data.findIndex((room) => room.id === action.payload);
+    //   state.data.splice(target, 1, action.payload);
+    // },
+    // [__updateRoom.rejected]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
 
-    // delete
+    // // delete
 
-    [__deleteRoom.pending]: (state) => {
-      state.isLoading = true;
-    },
-    [__deleteRoom.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      const target = state.data.findIndex((room) => room.id === action.payload);
-      state.data.splice(target, 1);
-    },
-    [__deleteRoom.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.room = action.payload;
-    },
+    // [__deleteRoom.pending]: (state) => {
+    //   state.isLoading = true;
+    // },
+    // [__deleteRoom.fulfilled]: (state, action) => {
+    //   state.isLoading = false;
+    //   const target = state.data.findIndex((room) => room.id === action.payload);
+    //   state.data.splice(target, 1);
+    // },
+    // [__deleteRoom.rejected]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.room = action.payload;
+    // },
   },
 });
 

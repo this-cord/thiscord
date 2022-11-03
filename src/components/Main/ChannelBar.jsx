@@ -1,30 +1,43 @@
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ModalPage from "../Main/ModalPage";
 
 const ChannelBar = () => {
-  // const roomData = useSelector((state) => state.mainSlice.data);
+  const navigate = useNavigate();
+  const onLogout = () => {
+    sessionStorage.removeItem("Access_Token");
+    sessionStorage.removeItem("Refresh_Token");
+    alert("로그아웃 성공");
+    navigate("/");
+  };
+  const userName = "엄준식";
+
+  const nameData = useSelector((state) => state);
+
+  console.log("나야", nameData);
+
   return (
     <TotalChannel>
       <ChannelList>
-        <Channel>메인서버</Channel>
+        <Channel>항해</Channel>
       </ChannelList>
       <ChannelSec>
-        <ChannelTop>김항해의 This.Cord</ChannelTop>
+        <ChannelTop>{userName} 님의 This.Cord</ChannelTop>
         <ChannelBody>
           <ChattingRoom>
-            {/* {roomData?.map((data) => (
-              <RoomItem data={data} />
+            {/* {nameData?.map((name) => (
+              <ModalPage name={name} />
             ))} */}
             <RoomName># 채팅방1</RoomName>
-            {/* <RoomItem /> */}
+            <RNChange>
+              <ModalPage />
+            </RNChange>
           </ChattingRoom>
         </ChannelBody>
         <ChannelB>
-          <UserInfo>김항해님</UserInfo>
-          <NewChatRoom>
-            <ModalPage />
-          </NewChatRoom>
+          <UserInfo>{userName}님</UserInfo>
+          <NewChatRoom onClick={onLogout}>로그아웃</NewChatRoom>
         </ChannelB>
       </ChannelSec>
     </TotalChannel>

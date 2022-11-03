@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import ModalPage from "../components/Main/ModalPage";
 import LoginPage from "../pages/LoginPage";
 import MainPage from "../pages/MainPage";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/sign" element={<SignPage />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="*" element={<NotFoundPage />} />
+        <Route path="/Modal" element={<ModalPage />} />
       </Routes>
     </BrowserRouter>
   );

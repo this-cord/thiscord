@@ -19,8 +19,7 @@ const Main = () => {
   //   dispatch(__getRoomById(roomId));
   // }, [dispatch, roomId]);
   // console.log("룸 아이디", roomId);
-  const roomData = useSelector((state) => state.mainSlice.data);
-  console.log("룸데잉터", roomData);
+  // const roomData = useSelector((state) => state.mainSlice.data);
 
   return (
     <MainContainer>
