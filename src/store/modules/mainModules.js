@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { __getPage } from "./mainThunk";
+import { __getDetail, __getPage } from "./mainThunk";
 
 const initialState = {
-  page: []
+  page: [],
+  detail: []
 };
 
 export const page = createSlice({
@@ -18,6 +19,17 @@ export const page = createSlice({
       state.page = action.payload;
     },
     [__getPage.rejected]: (state, action) => {
+      state.isLoading = false;
+    },
+
+    [__getDetail.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [__getDetail.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.detail = action.payload;
+    },
+    [__getDetail.rejected]: (state, action) => {
       state.isLoading = false;
     },
   },

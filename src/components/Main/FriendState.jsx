@@ -4,13 +4,13 @@ const FriendState = (props) => {
   return (
     <div>
       {props.status === "on" ? (
-        <div>
+        <User>
           {props.onName} ({props.status})
-        </div>
+        </User>
       ) : (
-        <div>
+        <User>
           {props.offName} ({props.status})
-        </div>
+        </User>
       )}
     </div>
   );
