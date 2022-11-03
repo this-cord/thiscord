@@ -1,25 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const ChannelBar = () => {
+const ChannelBar = (props) => {
   const navigate = useNavigate();
+
   const onLogout = () => {
     sessionStorage.removeItem("Access_Token");
     sessionStorage.removeItem("Refresh_Token");
     alert("로그아웃 성공");
     navigate("/");
   };
-  const userName = "엄준식";
+  let userName = props.userName;
+  if (userName === "엄준식") {
+    userName = "어떻게 사람 이름이 엄준식";
+  }
   return (
     <TotalChannel>
       <ChannelList>
         <Channel>항해</Channel>
       </ChannelList>
       <ChannelSec>
-        <ChannelTop>{userName} 님의 This.Cord</ChannelTop>
+        <ChannelTop>{userName}</ChannelTop>
         <ChannelBody>
           <ChattingRoom>
-            <RoomName># 채팅방1</RoomName>
+            <RoomName></RoomName>
             <RNChange>추가</RNChange>
           </ChattingRoom>
         </ChannelBody>

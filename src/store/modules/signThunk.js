@@ -18,16 +18,12 @@ export const __signUser = createAsyncThunk(
     }
   }
 );
+
 export const __loginUser = createAsyncThunk(
   "user/loginUser",
   async (payload, thunkAPI) => {
     try {
       const data = await axios.post(`${URL}/api/login`, payload)
-      if(data.data.result===true){
-        sessionStorage.setItem("Access_Token", data.headers.accesstoken);
-        sessionStorage.setItem("Refresh_Token", data.headers.refreshtoken);
-        console.log("로그인 성공", data.headers.accesstoken);
-      };
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -36,10 +32,11 @@ export const __loginUser = createAsyncThunk(
 );
 
 export const __logoutUser = createAsyncThunk(
-  "user/loginUser",
+  "user/logoutUser",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(`${URL}/api/logout`, payload)
+      const data = await axios.get(`${URL}/api/logout`, payload, {
+      })
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
