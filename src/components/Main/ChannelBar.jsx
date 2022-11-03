@@ -25,9 +25,11 @@ const ChannelBar = (props) => {
         <ChannelTop>{userName}</ChannelTop>
         <ChannelBody>
           <ChattingRoom>
-            {room &&
-              room.map((data, index) => <RoomName> data.roomName</RoomName>)}
             <RNChange>추가</RNChange>
+            {room &&
+              room.map((data) => (
+                <RoomName> {data.roomName.slice(9, -2)} </RoomName>
+              ))}
           </ChattingRoom>
         </ChannelBody>
         <ChannelB>
