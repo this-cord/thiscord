@@ -1,10 +1,9 @@
-import React from "react";
+import LoginBox from "./LoginBox";
 
 const Login = () => {
   return (
     <>
-      <div>Login Page</div>
-      <div>Sub Title</div>
+      <LoginBox />
     </>
   );
 };
