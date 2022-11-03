@@ -10,10 +10,12 @@ const ChannelBar = (props) => {
     alert("로그아웃 성공");
     navigate("/");
   };
+
   let userName = props.userName;
   if (userName === "엄준식") {
     userName = "어떻게 사람 이름이 엄준식";
   }
+  const room = props.room;
   return (
     <TotalChannel>
       <ChannelList>
@@ -23,7 +25,8 @@ const ChannelBar = (props) => {
         <ChannelTop>{userName}</ChannelTop>
         <ChannelBody>
           <ChattingRoom>
-            <RoomName></RoomName>
+            {room &&
+              room.map((data, index) => <RoomName> data.roomName</RoomName>)}
             <RNChange>추가</RNChange>
           </ChattingRoom>
         </ChannelBody>
@@ -113,7 +116,7 @@ const ChattingRoom = styled.div`
   margin-top: 15px;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 `;
