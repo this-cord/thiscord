@@ -1,7 +1,19 @@
 import styled from "styled-components";
 
 const FriendState = (props) => {
-  return <User>{props.name}</User>;
+  return (
+    <div>
+      {props.status === "on" ? (
+        <div>
+          {props.onName} ({props.status})
+        </div>
+      ) : (
+        <div>
+          {props.offName} ({props.status})
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default FriendState;
