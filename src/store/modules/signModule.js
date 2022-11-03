@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { __loginUser, __logoutUser, __signUser } from "./signThunk";
+import { __loginUser, __signUser } from "./signThunk";
 
 const initialState = {
   user: [{}],
@@ -10,14 +10,7 @@ const initialState = {
 export const users = createSlice({
   name: "users",
   initialState,
-  reducers: {
-    loginState: (state) => {
-      state.isLogin = true;
-    },
-    logoutState: (state) => {
-      state.isLogin = false;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [__signUser.pending]: (state, action) => {
       state.isLoading = true;
@@ -34,19 +27,22 @@ export const users = createSlice({
     },
     [__loginUser.pending]: (state, action) => {
       state.isLoading = true;
+      state.isLogin = false;
     },
     [__loginUser.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isLogin = true;
+      sessionStorage.setItem("AccessToken", action.payload.headers.accesstoken);
+      sessionStorage.setItem(
+        "RefreshToken",
+        action.payload.headers.refreshtoken
+      );
+      alert("로그인 성공");
     },
     [__loginUser.rejected]: (state, action) => {
       state.isLoading = false;
       state.isLogin = false;
       alert("아이디와 비밀번호를 확인하세요.");
-    },
-    [__logoutUser.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.isLogin = false;
     },
   },
 });

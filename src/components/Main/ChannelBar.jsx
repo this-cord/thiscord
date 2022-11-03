@@ -3,19 +3,22 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ModalPage from "../Main/ModalPage";
 
-const ChannelBar = () => {
+const ChannelBar = (props) => {
   const navigate = useNavigate();
+
   const onLogout = () => {
     sessionStorage.removeItem("Access_Token");
     sessionStorage.removeItem("Refresh_Token");
     alert("로그아웃 성공");
     navigate("/");
-  };
-  const userName = "엄준식";
+  
+  const nameData = useSelector((state) => (state));
 
-  const nameData = useSelector((state) => state);
-
-  console.log("나야", nameData);
+  console.log("네임데이터", nameData);
+  let userName = props.userName;
+  if (userName === "엄준식") {
+    userName = "어떻게 사람 이름이 엄준식";
+  }
 
   return (
     <TotalChannel>
@@ -23,13 +26,15 @@ const ChannelBar = () => {
         <Channel>항해</Channel>
       </ChannelList>
       <ChannelSec>
-        <ChannelTop>{userName} 님의 This.Cord</ChannelTop>
+        <ChannelTop>{userName}</ChannelTop>
         <ChannelBody>
           <ChattingRoom>
-            {/* {nameData?.map((name) => (
-              <ModalPage name={name} />
-            ))} */}
-            <RoomName># 채팅방1</RoomName>
+            {nameData?.map((item) => (
+              <RoomName id={item.data.ChattingRoom.roomId}># 채팅방1
+
+              </RoomName>
+            ))}
+            
             <RNChange>
               <ModalPage />
             </RNChange>
@@ -44,7 +49,7 @@ const ChannelBar = () => {
   );
 };
 
-export default ChannelBar;
+// export default ChannelBar;
 
 // 채널리스트+ 옆섹션
 const TotalChannel = styled.div`

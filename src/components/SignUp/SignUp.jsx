@@ -54,10 +54,6 @@ const SignUp = () => {
     resolver: yupResolver(schema),
   });
 
-  const submitForm = (data: SignUp) => {
-    console.log("떠야지", data);
-  };
-
   return (
     <LoginForm title={"This.Cord 계정 만들기"} subtitle="">
       <Container>

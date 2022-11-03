@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import ModalPage from "./ModalPage";
-import { __addRoom, __getRoomById } from "../../store/modules/mainSlice";
-import useInput from "../../hooks/useInput";
+import { __getPage } from "../../store/modules/mainThunk";
+
 import ChannelBar from "./ChannelBar";
 import ChattingRoom from "./ChattingRoom";
 import FriendBar from "./FriendBar";
@@ -12,21 +11,22 @@ import FriendBar from "./FriendBar";
 const Main = () => {
   const dispatch = useDispatch();
 
-  // const params = useParams();
-  // const roomId = params.id;
-
-  // useEffect(() => {
-  //   dispatch(__getRoomById(roomId));
-  // }, [dispatch, roomId]);
-  // console.log("룸 아이디", roomId);
-  // const roomData = useSelector((state) => state.mainSlice.data);
+  useEffect(() => {
+    dispatch(__getPage());
+  }, [dispatch]);
+  const mainPage = useSelector((state) => state.post?.page);
+  const name = mainPage?.name;
+  const room = mainPage?.chattingRoom;
+  const onlineUser = mainPage?.onlineUser;
+  const offlineUser = mainPage?.offlineUser;
+  console.log(mainPage);
 
   return (
     <MainContainer>
       <Container>
-        <ChannelBar />
+        <ChannelBar userName={name} ChattingRoom={room} />
         <ChattingRoom />
-        <FriendBar />
+        <FriendBar online={onlineUser} offline={offlineUser} />
       </Container>
     </MainContainer>
   );

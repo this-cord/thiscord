@@ -22,9 +22,9 @@ const LoginBox = () => {
     });
   };
   /*
-email: test001@gmail.com"
-name:"테스트용"
-password: "test001@"
+email: umjunsik03@gmail.com"
+name:"엄준식"
+password: "엄준식123@"
 */
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -34,8 +34,7 @@ password: "test001@"
         password: userData.password,
       })
     );
-    if (sessionStorage.Access_Token !== undefined) {
-      alert("로그인 성공");
+    if (sessionStorage.AccessToken !== undefined) {
       navigate("/main");
     }
   };
